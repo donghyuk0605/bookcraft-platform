@@ -1,0 +1,337 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 디자인 가이드에 맞춘 색상 팔레트 */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* 메인 컬러: 퍼플 (#7F56D9) */
+    --primary: 263 84% 59%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 263 84% 59%;
+
+    /* 보조 컬러 */
+    --mint: 168 70% 50%;
+    --apricot: 30 95% 72%;
+    --warning: 0 91% 71%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 263 84% 69%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 263 84% 69%;
+
+    /* 다크모드 보조 컬러 */
+    --mint: 168 70% 40%;
+    --apricot: 30 95% 62%;
+    --warning: 0 91% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight font-medium;
+  }
+}
+
+@layer components {
+  .gradient-heading {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
+  }
+
+  .dark .gradient-heading {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .book-cover {
+    @apply relative overflow-hidden rounded-lg shadow-sm transition-all duration-300;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .book-cover:hover {
+    transform: rotateY(5deg);
+    @apply shadow-md;
+  }
+
+  .book-cover::after {
+    content: "";
+    @apply absolute top-0 left-0 w-1 h-full bg-black/10 rounded-l-sm;
+    transform: translateX(-0.5px) rotateY(-20deg);
+    transform-origin: left;
+  }
+
+  .book-spine {
+    @apply absolute top-0 left-0 w-1 h-full bg-primary/20 rounded-l-sm;
+    transform: translateX(-0.5px);
+  }
+
+  .page-shadow {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  }
+
+  .editor-container {
+    @apply border rounded-lg p-4 min-h-[300px] focus:outline-none focus:ring-1 focus:ring-primary;
+  }
+
+  .apple-blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .apple-button {
+    @apply rounded-full bg-primary text-white font-medium px-4 py-2 transition-all hover:bg-primary/90 active:scale-95;
+  }
+
+  .apple-card {
+    @apply rounded-xl border border-border/50 bg-card shadow-sm;
+  }
+
+  /* 차트 스타일링 */
+  .chart-container {
+    @apply relative h-full w-full;
+  }
+
+  .chart-grid {
+    @apply absolute inset-0;
+    background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+    --border-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .chart-grid {
+    --border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* 애니메이션 */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-pulse-slow {
+    animation: pulseSlow 3s infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spinSlow 20s linear infinite;
+  }
+
+  .animate-leaf-sway {
+    animation: leafSway 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulseSlow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes spinSlow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes leafSway {
+    0%,
+    100% {
+      transform: rotate(-2deg);
+    }
+    50% {
+      transform: rotate(2deg);
+    }
+  }
+
+  /* 전문적인 스크롤바 */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
+
+.prose {
+  @apply max-w-none;
+}
+
+.prose h1 {
+  @apply text-3xl font-medium mt-8 mb-4;
+}
+
+.prose h2 {
+  @apply text-2xl font-medium mt-8 mb-4;
+}
+
+.prose h3 {
+  @apply text-xl font-medium mt-6 mb-3;
+}
+
+.prose p {
+  @apply my-4;
+}
+
+.prose figure {
+  @apply my-6;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-muted pl-4 italic my-6;
+}
+
+.prose ul {
+  @apply list-disc pl-6 my-4;
+}
+
+.prose ol {
+  @apply list-decimal pl-6 my-4;
+}
+
+/* 언어별 폰트 설정 */
+.lang-ko {
+  font-family: var(--font-heading-kr), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.lang-jp {
+  font-family: var(--font-heading-jp), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.lang-en {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 페이지 넘김 애니메이션 */
+.page-flip {
+  transition: transform 250ms ease;
+  transform-style: preserve-3d;
+}
+
+.page-flip:hover {
+  transform: rotateY(15deg);
+}
+
+/* 집필 집중 모드 */
+.focus-mode {
+  @apply bg-gray-900 text-white;
+}
+
+.focus-mode .sidebar {
+  @apply -translate-x-full;
+}
+
+.focus-mode .editor-container {
+  @apply max-w-3xl mx-auto;
+}
+
+/* 독서 진행 인디케이터 */
+.reading-progress {
+  @apply fixed bottom-0 left-0 h-1 bg-primary transition-all;
+}
