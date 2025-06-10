@@ -37,6 +37,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LanguageSelector } from "@/components/language-selector"
+import { TextEditor } from "@/components/text-editor"
 
 export default function EditorPage({ params }: { params: { id: string } }) {
   const [chapters, setChapters] = useState([
@@ -66,6 +67,16 @@ export default function EditorPage({ params }: { params: { id: string } }) {
   const toggleChapter = (id: number) => {
     setChapters(chapters.map((chapter) => (chapter.id === id ? { ...chapter, expanded: !chapter.expanded } : chapter)))
   }
+
+  const initialContent = `
+  <h1>여름 여행 일기</h1>
+  <p>2023년 여름, 제주도에서의 특별한 순간들</p>
+  <h2>첫째 날: 도착과 설렘</h2>
+  <p>제주공항에 도착했을 때, 공기부터 달랐습니다. 바다 내음이 섞인 신선한 공기가 반갑게 맞이해주었습니다.</p>
+  <h2>둘째 날: 자연과의 만남</h2>
+  <p>둘째 날은 제주의 자연을 탐험하며 오름을 올랐습니다. 정상에서 바라본 전경은 장관이었습니다.</p>
+  <blockquote><p>"여행의 진정한 의미는 새로운 풍경을 보는 것이 아니라, 새로운 시각을 갖는 것이다."</p><footer>- 마르셀 프루스트</footer></blockquote>
+  `
 
   return (
     <div className="flex h-screen flex-col">
@@ -343,46 +354,7 @@ export default function EditorPage({ params }: { params: { id: string } }) {
         </aside>
         <main className="flex-1 overflow-auto bg-background">
           <div className="max-w-4xl mx-auto p-8">
-            <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto bg-white dark:bg-background p-8 rounded-lg page-shadow">
-              <h1>여름 여행 일기</h1>
-              <p className="lead">2023년 여름, 제주도에서의 특별한 순간들</p>
-              <p>
-                여행은 언제나 새로운 경험과 추억을 선사합니다. 특히 올해 여름 제주도 여행은 그 어느 때보다 특별했습니다.
-                코로나19로 인해 미뤄왔던 여행을 드디어 실현하게 되었고, 그 기쁨은 말로 표현할 수 없을 정도였습니다.
-              </p>
-              <h2>첫째 날: 도착과 설렘</h2>
-              <p>
-                제주공항에 도착했을 때, 공기부터 달랐습니다. 바다 내음이 섞인 신선한 공기가 반갑게 맞이해주었고,
-                렌터카를 빌려 첫 목적지인 숙소로 향했습니다. 숙소는 서쪽 해변가 근처로 정했는데, 이는 제주의 아름다운
-                일몰을 보기 위한 전략적 선택이었습니다.
-              </p>
-              <p>
-                체크인 후 바로 근처 해변으로 향했습니다. 발에 닿는 모래의 감촉, 귓가에 들리는 파도 소리, 그리고 눈앞에
-                펼쳐진 끝없는 바다는 도시의 일상에서 완전히 벗어난 느낌을 주었습니다.
-              </p>
-              <figure>
-                <div className="bg-muted h-64 flex items-center justify-center">
-                  <ImageIcon className="h-12 w-12 text-muted-foreground/50" />
-                </div>
-                <figcaption className="text-center text-sm text-muted-foreground mt-2">
-                  제주 서쪽 해변에서 바라본 일몰
-                </figcaption>
-              </figure>
-              <h2>둘째 날: 자연과의 만남</h2>
-              <p>
-                둘째 날은 일찍 일어나 제주의 자연을 탐험하기로 했습니다. 첫 목적지는 유명한 오름이었습니다. 오름에
-                오르는 길은 생각보다 가파르고 힘들었지만, 정상에서 바라본 전경은 그 모든 수고를 보상해주었습니다. 푸른
-                하늘과 초록 들판, 그리고 멀리 보이는 바다가 어우러진 풍경은 말 그대로 장관이었습니다.
-              </p>
-              <p>
-                오후에는 근처 마을의 작은 카페에서 휴식을 취했습니다. 제주 특산품인 감귤을 활용한 디저트와 향긋한 커피
-                한 잔은 여행의 피로를 씻어주는 데 충분했습니다.
-              </p>
-              <blockquote>
-                <p>"여행의 진정한 의미는 새로운 풍경을 보는 것이 아니라, 새로운 시각을 갖는 것이다."</p>
-                <footer>- 마르셀 프루스트</footer>
-              </blockquote>
-            </div>
+            <TextEditor defaultContent={initialContent} />
           </div>
         </main>
       </div>
